@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+
+<body>
+    <header class="quiz-header">
+        <a href="{{ url_for('home') }}" class="home-link">WolfQuiz Home</a>
+    </header>
+    <div class="main-content-container">
+        <h2 class="results-heading">Your Results</h2>
+
+        <!-- Loop through your quiz results here -->
+        {% for r in results %}
+            <div class="question-block">
+                <h3>Q: {{ r.question }}</h3>
+                <img src="{{ url_for('static', filename='images/' + r.image) }}" alt="city image" class="city-image">
+
+                <!-- Moved the correct/wrong message here, right after the image -->
+                {% if r.is_correct %}
+                    <p class="correct">Correct!</p>
+                {% else %}
+                    <p class="wrong">Wrong!</p>
+                {% endif %}
+
+                <p>Your answer: {{ r.your_answer }}</p>
+                <p>Correct answer: {{ r.correct_answer }}</p>
+            </div>
+        {% endfor %}
+
+        <button onclick="window.location.href='/'">Go Back to Quiz</button>
+        
+    </div>
+</body>
+</html>

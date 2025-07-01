@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WolfQuiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+
+
+<body>
+    <header class="quiz-header">
+        <a href="{{ url_for('home') }}" class="home-link">WolfQuiz Home</a>
+    </header>
+
+    <div class="quiz-container">
+        <h2>Question {{ index + 1 }} of {{ total_questions }}</h2>
+        <p class="question-text">{{ question.question }}</p>
+
+        {% if question.image %}
+            <div class="image-wrapper">
+                <img src="{{ url_for('static', filename='images/' + question.image) }}" 
+                     class="city-image" 
+                     alt="Question Image"
+                     loading="lazy">
+            </div>
+        {% endif %}
+
+        <form method="POST" class="options-form">
+            {% for option in question.options %}
+                <label class="option-label">
+                    <input type="radio" name="answer" value="{{ option }}" required>
+                    <span class="option-text">{{ option }}</span>
+                </label>
+            {% endfor %}
+            <button type="submit" class="submit-btn">Submit Answer</button>
+        </form>
+    </div>
+</body>
+</html>
