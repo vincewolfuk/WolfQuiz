@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Capital City Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <header class="quiz-header">
+        <a href="{{ url_for('home') }}" class="home-link">WolfQuiz Home</a>
+    </header>
+    <h1>Capital City Quiz</h1>
+<form method="POST">
+    {% for q in quiz %}
+        {% set q_index = loop.index0 %}
+        <div class="question-block">
+            <p><strong>Q{{ loop.index }}:</strong> {{ q.question }}</p>
+            <img src="{{ url_for('static', filename='images/' + q.image) }}" alt="city image" class="city-image">
+           
+            {% for option in q.options %}
+                <div>
+                    <input type="radio" name="answer{{ q_index }}" value="{{ option }}" required>
+                    <label>{{ option }}</label>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <button type="submit">Submit Answers</button>
+</form>
+
+
+
+
+
+
+</body>
+</html>

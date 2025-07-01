@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <header class="quiz-header">
+        <a href="{{ url_for('home') }}" class="home-link">WolfQuiz Home</a>
+    </header>
+    <div class="feedback-container">
+        <h1 class="{% if feedback.is_correct %}correct{% else %}wrong{% endif %}">
+            {{ feedback.message }}
+        </h1>
+        
+        {% if feedback.feedback_image %}
+            <img src="{{ url_for('static', filename='images/' + feedback.feedback_image) }}" 
+                 class="feedback-image"
+                 alt="Feedback Image">
+        {% endif %}
+        
+        <form method="POST">
+            <button type="submit" class="next-btn">
+                Next Question
+            </button>
+        </form>
+    </div>
+</body>
+</html>
